@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .models import Post, Comment
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 @csrf_exempt 
 def index(request):
@@ -40,4 +41,7 @@ def getPosts(request):
   return JsonResponse(data, safe=False)
 
 def newPost(request):
-  return HttpResponse("make new post with " + str(request.body))
+  data = json.loads(request.body)
+  p = Post(title=data['title'], body=data['body'])
+  p.save()
+  return HttpResponse("post " + p.title + " successfully created")
