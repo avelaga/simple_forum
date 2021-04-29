@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from posts import views as post_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('posts.urls')),
+    # path('', include('posts.urls')),
+    path('comments', post_views.CommentListCreate.as_view(), name="comment-list-create")
 ]
