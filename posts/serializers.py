@@ -6,8 +6,13 @@ class CommentSerializer(serializers.ModelSerializer):
     model = Comment
     fields = "__all__"
 
-class PostSerializer(serializers.ModelSerializer):
-  comments = CommentSerializer('comments', many=True)
+class PostListSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Post
+    fields = "__all__"
+
+class PostDetailSerializer(serializers.ModelSerializer):
+  comments = CommentSerializer('comments', many=True) # comments reference comes from related_name in model
   class Meta:
     model = Post
     fields = "__all__"

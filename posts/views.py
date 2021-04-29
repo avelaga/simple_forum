@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from .models import Post, Comment
 from rest_framework import generics
-from .serializers import CommentSerializer, PostSerializer
+from .serializers import CommentSerializer, PostListSerializer, PostDetailSerializer
 
 # POSTS 
 
 class PostList(generics.ListCreateAPIView):
   queryset = Post.objects.all()
-  serializer_class = PostSerializer
+  serializer_class = PostListSerializer
 
 class PostDetail(generics.RetrieveAPIView):
   queryset = Post.objects.all()
-  serializer_class = PostSerializer
+  serializer_class = PostDetailSerializer
 
 class PostDelete(generics.DestroyAPIView):
   queryset = Post.objects.all()
